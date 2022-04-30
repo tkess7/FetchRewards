@@ -5,9 +5,19 @@
 - Java 11
 - Gradle
 
-### The following 3 endpoints are currently supported
+To run the application, running the following command in the fetchrewards directory:
 
-Create transaction:
+`./gradlew bootRun`
+
+### 3 endpoints are supported and can be viewed via swagger:
+
+After starting the application, the swagger page can be located at:
+
+`http://localhost:8080/swagger-ui/`
+
+![swagger](src/main/resources/swagger.png)
+
+### Example request data and curl commands
 
 `POST /transaction`
 

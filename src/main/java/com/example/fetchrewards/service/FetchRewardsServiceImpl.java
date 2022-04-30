@@ -61,7 +61,7 @@ public class FetchRewardsServiceImpl implements FetchRewardsService {
                 pointsToRemove -= transaction.getPoints();
                 spentPointsHelper.subtractPoints(transaction.getPayer(), transaction.getPoints());
 
-                //Delete transaction since points are gone for that transaction
+                //Delete transaction since there are no remaining points for that transaction
                 transactionRepository.deleteTransaction(transaction.getId());
             } else {
                 int updatePoints = transaction.getPoints() - pointsToRemove;
@@ -72,19 +72,23 @@ public class FetchRewardsServiceImpl implements FetchRewardsService {
             }
         }
 
-        for(Map.Entry<String, Integer> entry : spentPointsHelper.getSubtractedPoints().entrySet()) {
+        for(Map.Entry<String, Integer> entry : spentPointsHelper.getPointsToRemoveForPayer().entrySet()) {
             payerRepository.updatePayerBalance(entry.getKey(), entry.getValue());
         }
 
         List<Payer> payerList = new ArrayList<>();
 
-        for(Map.Entry<String, Integer> entry : spentPointsHelper.getSubtractedPoints().entrySet()) {
+        for(Map.Entry<String, Integer> entry : spentPointsHelper.getPointsToRemoveForPayer().entrySet()) {
             payerList.add(new Payer(entry.getKey(), entry.getValue()));
         }
 
         return payerList;
     }
 
+    /**
+     * Retrieves all points.
+     * @return List of Payer with their point values
+     */
     @Override
     public List<Payer> retrievePoints() {
        return payerRepository.findAll();

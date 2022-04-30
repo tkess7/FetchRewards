@@ -1,5 +1,7 @@
 package com.example.fetchrewards.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,6 +10,7 @@ import java.util.Date;
 @Entity
 public class Transaction {
 
+    @ApiModelProperty(hidden = true)
     @Id
     @GeneratedValue
     private Long id;
