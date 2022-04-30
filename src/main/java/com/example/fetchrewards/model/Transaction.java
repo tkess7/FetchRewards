@@ -19,6 +19,15 @@ public class Transaction {
     private int points;
     private Date timestamp;
 
+    public Transaction() {
+    }
+
+    public Transaction(String payer, int points, Date timestamp) {
+        this.payer = payer;
+        this.points = points;
+        this.timestamp = timestamp;
+    }
+
     public Long getId() {
         return id;
     }
